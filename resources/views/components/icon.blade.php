@@ -7,6 +7,7 @@
         // The provisional store mark: a photo frame with a slash. It stands in
         // for an identity that does not exist yet, so it never implies one.
         'mark' => '<rect x="4.75" y="4.75" width="14.5" height="14.5" rx="2.5"/><path d="M9 15 15 9"/>',
+        'home' => '<path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.5V19h11v-9.5"/><path d="M10 19v-5.5h4V19"/>',
         'menu' => '<path d="M3.5 7.5h17"/><path d="M3.5 12h17"/><path d="M3.5 16.5h11"/>',
         'close' => '<path d="M6 6l12 12"/><path d="M18 6L6 18"/>',
         'arrow-right' => '<path d="M4 12h16"/><path d="M13.5 5.5 20 12l-6.5 6.5"/>',

@@ -38,6 +38,11 @@
                         Ask on WhatsApp
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center rounded-md bg-ink px-3 py-1.5 text-sm font-medium text-paper transition hover:bg-ink/90">
+                        Admin dashboard
+                    </a>
+                </li>
                 <li class="leading-relaxed">
                     The seller confirms stock, the delivery area and the total in the chat. Delivery
                     coverage and fees are not finalised yet.
