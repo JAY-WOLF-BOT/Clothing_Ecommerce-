@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T13:11:09Z",
+  "title": "Design System: Ghanaian womenswear storefront",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "oklch(14.5% 0.004 286)",
+        "tonalRamp": ["#0b0b0c", "#17171a", "#26262b", "#3a3a40", "#57575c", "#7a7a80", "#a9a9ae", "#dcdcde"]
+      },
+      "ink-soft": {
+        "role": "primary-hover",
+        "displayName": "Ink Soft",
+        "canonical": "oklch(21% 0.005 286)",
+        "tonalRamp": ["#0b0b0c", "#17171a", "#26262b", "#3a3a40", "#57575c", "#7a7a80", "#a9a9ae", "#dcdcde"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": ["#111113", "#1f1f22", "#33333a", "#4f4f57", "#6e6e76", "#94949b", "#c2c2c7", "#ffffff"]
+      },
+      "mist": {
+        "role": "neutral-recessed",
+        "displayName": "Mist",
+        "canonical": "oklch(97% 0.001 106)",
+        "tonalRamp": ["#111113", "#1f1f22", "#33333a", "#4f4f57", "#6e6e76", "#94949b", "#c2c2c7", "#f5f5f4"]
+      },
+      "line": {
+        "role": "border",
+        "displayName": "Hairline",
+        "canonical": "oklch(91.5% 0 0)",
+        "tonalRamp": ["#2a2a2d", "#45454a", "#6b6b70", "#8f8f94", "#b0b0b4", "#cfcfd2", "#e4e4e4", "#f5f5f4"]
+      },
+      "line-strong": {
+        "role": "border-hover",
+        "displayName": "Hairline Strong",
+        "canonical": "oklch(81% 0 0)",
+        "tonalRamp": ["#2a2a2d", "#45454a", "#6b6b70", "#8f8f94", "#b0b0b4", "#c8c8c8", "#e4e4e4", "#f5f5f4"]
+      },
+      "muted": {
+        "role": "muted-text",
+        "displayName": "Muted Ink",
+        "canonical": "oklch(46% 0.006 286)",
+        "tonalRamp": ["#0f0f12", "#1d1d21", "#2f2f36", "#45454d", "#57575c", "#76767d", "#a3a3a9", "#d8d8dc"]
+      },
+      "on-ink": {
+        "role": "on-primary",
+        "displayName": "Paper on Ink",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": ["#111113", "#1f1f22", "#33333a", "#4f4f57", "#6e6e76", "#94949b", "#c2c2c7", "#ffffff"]
+      },
+      "on-ink-muted": {
+        "role": "on-primary-muted",
+        "displayName": "Smoke on Ink",
+        "canonical": "oklch(79% 0.004 286)",
+        "tonalRamp": ["#3a3a3f", "#4f4f55", "#67676d", "#82828a", "#9d9da4", "#b9b9bf", "#d4d4d9", "#ececee"]
+      },
+      "signal": {
+        "role": "accent-functional",
+        "displayName": "Signal Red",
+        "canonical": "oklch(51% 0.21 22)",
+        "tonalRamp": ["#3d0410", "#5c0618", "#7d0820", "#9e0a28", "#c8102e", "#e0354f", "#ee7286", "#fbd3da"]
+      },
+      "signal-soft": {
+        "role": "accent-tint",
+        "displayName": "Signal Wash",
+        "canonical": "oklch(96% 0.02 20)",
+        "tonalRamp": ["#3d0410", "#7d0820", "#c8102e", "#e0354f", "#ee7286", "#f6a8b6", "#fbd3da", "#fdeef1"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page headings only. Bricolage Grotesque 800 at -0.035em, never below 1.9rem." },
+      "section": { "displayName": "Section", "purpose": "Section headings above a hairline rule. Bricolage Grotesque 800 at -0.025em." },
+      "card": { "displayName": "Card Title", "purpose": "Product and post titles. Bricolage Grotesque 700 at -0.015em." },
+      "body": { "displayName": "Body", "purpose": "Running copy in Archivo 400 at 0.875rem, measure kept to 60-75 characters." },
+      "micro": { "displayName": "Micro Label", "purpose": "Archivo 600, 0.75rem, uppercase at 0.12em. Metadata and control legends; never body copy." }
+    },
+    "shadows": [
+      { "name": "lift", "value": "0 1px 2px rgb(11 11 12 / 0.05), 0 18px 32px -20px rgb(11 11 12 / 0.28)", "purpose": "Hover elevation on interactive cards, and the resting elevation of the two genuinely floating surfaces (garment panel over media, toasts)." },
+      { "name": "sheet", "value": "0 28px 60px -28px rgb(11 11 12 / 0.4)", "purpose": "The mobile navigation drawer." }
+    ],
+    "motion": [
+      { "name": "ease-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Every transition and reveal in the system. Exponential ease-out from an already-visible default." },
+      { "name": "settle", "value": "620ms", "purpose": "The page's one authored reveal: a 14px translate as an element enters, staggered 55ms, transform only. Text never fades or blurs." },
+      { "name": "toast", "value": "400ms", "purpose": "Toast entry: opacity plus a 10px lift at 0.98 scale." },
+      { "name": "badge-pop", "value": "420ms", "purpose": "The bag count landing after a mutation." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The committing action: add to bag, continue to checkout. Ink field, paper text.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Add to bag</button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; border:0; border-radius:var(--radius-control, 12px); background:var(--color-ink, #0b0b0c); color:var(--color-paper, #fff); font-family:var(--font-sans, Archivo, sans-serif); font-size:.875rem; font-weight:600; letter-spacing:-.01em; line-height:1; cursor:pointer; transition:background-color .24s var(--ease-expo, cubic-bezier(.16,1,.3,1)), transform .24s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-btn-primary:hover:not(:disabled) { background:var(--color-ink-soft, #17171a); } .ds-btn-primary:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; } .ds-btn-primary:active:not(:disabled) { transform:translateY(1px); } .ds-btn-primary:disabled { opacity:.4; cursor:not-allowed; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The alternate path, such as ordering on WhatsApp. Never competes with the primary action.",
+      "html": "<button class=\"ds-btn-secondary\" type=\"button\">Order on WhatsApp</button>",
+      "css": ".ds-btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; border:1px solid var(--color-line, #e4e4e4); border-radius:var(--radius-control, 12px); background:var(--color-paper, #fff); color:var(--color-ink, #0b0b0c); font-family:var(--font-sans, Archivo, sans-serif); font-size:.875rem; font-weight:600; letter-spacing:-.01em; line-height:1; cursor:pointer; transition:border-color .24s var(--ease-expo, cubic-bezier(.16,1,.3,1)), transform .24s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-btn-secondary:hover:not(:disabled) { border-color:var(--color-ink, #0b0b0c); } .ds-btn-secondary:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; } .ds-btn-secondary:active:not(:disabled) { transform:translateY(1px); }"
+    },
+    {
+      "name": "Inverse Button",
+      "kind": "button",
+      "refersTo": "button-inverse",
+      "description": "A primary-weight action inside an ink band, e.g. the closing order section.",
+      "html": "<button class=\"ds-btn-inverse\" type=\"button\">Open WhatsApp</button>",
+      "css": ".ds-btn-inverse { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; border:0; border-radius:var(--radius-control, 12px); background:var(--color-paper, #fff); color:var(--color-ink, #0b0b0c); font-family:var(--font-sans, Archivo, sans-serif); font-size:.875rem; font-weight:600; letter-spacing:-.01em; line-height:1; cursor:pointer; transition:background-color .24s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-btn-inverse:hover { background:#ededed; } .ds-btn-inverse:focus-visible { outline:2px solid var(--color-paper, #fff); outline-offset:2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Named inputs and selects. Focus swaps the hairline to ink and adds a 3px ink wash.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-field-demo\">Full name</label>\n<input id=\"ds-field-demo\" class=\"ds-field\" type=\"text\" placeholder=\"Ama Mensah\">",
+      "css": ".ds-field-label { display:block; margin-bottom:8px; font-family:var(--font-sans, Archivo, sans-serif); font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted, #57575c); } .ds-field { width:100%; padding:13px 14px; border:1px solid var(--color-line, #e4e4e4); border-radius:var(--radius-control, 12px); background:var(--color-paper, #fff); color:var(--color-ink, #0b0b0c); font-family:var(--font-sans, Archivo, sans-serif); font-size:.875rem; caret-color:var(--color-ink, #0b0b0c); transition:border-color .2s var(--ease-expo, cubic-bezier(.16,1,.3,1)), box-shadow .2s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-field::placeholder { color:var(--color-muted, #57575c); } .ds-field:hover { border-color:var(--color-line-strong, #c8c8c8); } .ds-field:focus { outline:none; border-color:var(--color-ink, #0b0b0c); box-shadow:0 0 0 3px rgb(11 11 12 / .08); }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Uppercase tracked label for badges and state. Five tones: paper, mist, ink, signal, signal-quiet.",
+      "html": "<span class=\"ds-chip ds-chip--signal\">35% off</span>",
+      "css": ".ds-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:var(--radius-pill, 999px); font-family:var(--font-sans, Archivo, sans-serif); font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; line-height:1; background:var(--color-mist, #f5f5f4); color:var(--color-muted, #57575c); } .ds-chip--ink { background:var(--color-ink, #0b0b0c); color:var(--color-paper, #fff); } .ds-chip--paper { background:var(--color-paper, #fff); color:var(--color-ink, #0b0b0c); box-shadow:0 1px 2px rgb(11 11 12 / .12); } .ds-chip--signal { background:var(--color-signal, #c8102e); color:#fff; } .ds-chip--signal-quiet { background:var(--color-signal-soft, #fdeef1); color:var(--color-signal, #c8102e); }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "4:5 media over title, meta and a price row. Hairline at rest; hover gives up the border and takes Lift.",
+      "html": "<a class=\"ds-product-card\" href=\"#\">\n  <span class=\"ds-product-card__media\">\n    <span class=\"ds-chip ds-chip--paper\">Best seller</span>\n  </span>\n  <span class=\"ds-product-card__body\">\n    <span class=\"ds-product-card__title\">Adjoa Silk Slip Dress</span>\n    <span class=\"ds-product-card__meta\">Silk Series</span>\n    <span class=\"ds-product-card__row\">\n      <span class=\"ds-product-card__price\">GH&#8373; 780</span>\n      <span class=\"ds-product-card__action\">Take a size</span>\n    </span>\n  </span>\n</a>",
+      "css": ".ds-product-card { display:block; overflow:hidden; border:1px solid var(--color-line, #e4e4e4); border-radius:var(--radius-card, 16px); background:var(--color-paper, #fff); color:inherit; text-decoration:none; transition:border-color .3s var(--ease-expo, cubic-bezier(.16,1,.3,1)), box-shadow .3s var(--ease-expo, cubic-bezier(.16,1,.3,1)), transform .3s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-product-card:hover { border-color:transparent; box-shadow:var(--shadow-lift, 0 1px 2px rgb(11 11 12 / .05), 0 18px 32px -20px rgb(11 11 12 / .28)); transform:translateY(-3px); } .ds-product-card:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; } .ds-product-card__media { position:relative; display:block; aspect-ratio:4/5; background:var(--color-mist, #f5f5f4); } .ds-product-card__media > .ds-chip { position:absolute; top:12px; left:12px; } .ds-product-card__body { display:block; padding:16px; } .ds-product-card__title { display:block; font-family:var(--font-display, 'Bricolage Grotesque', sans-serif); font-size:.9375rem; font-weight:700; letter-spacing:-.015em; line-height:1.35; color:var(--color-ink, #0b0b0c); } .ds-product-card__meta { display:block; margin-top:6px; font-family:var(--font-sans, Archivo, sans-serif); font-size:.75rem; color:var(--color-muted, #57575c); } .ds-product-card__row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; } .ds-product-card__price { font-family:var(--font-sans, Archivo, sans-serif); font-size:.9375rem; font-weight:600; font-variant-numeric:tabular-nums; color:var(--color-ink, #0b0b0c); } .ds-product-card__action { font-family:var(--font-sans, Archivo, sans-serif); font-size:.75rem; font-weight:600; color:var(--color-muted, #57575c); transition:color .3s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-product-card:hover .ds-product-card__action { color:var(--color-ink, #0b0b0c); }"
+    },
+    {
+      "name": "Shoppable Garment Row",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "The signature control inside a feed post: thumbnail, name, cedi price, and a real size choice before Add. A form, so it works with scripting off.",
+      "html": "<div class=\"ds-garment\">\n  <span class=\"ds-garment__thumb\"></span>\n  <span class=\"ds-garment__text\">\n    <span class=\"ds-garment__name\">Adjoa Silk Slip Dress</span>\n    <span class=\"ds-garment__price\">GH&#8373; 780</span>\n  </span>\n  <form class=\"ds-garment__form\">\n    <select class=\"ds-garment__size\" aria-label=\"Size\"><option>M</option><option>L</option></select>\n    <button class=\"ds-garment__add\" type=\"button\">Add</button>\n  </form>\n</div>",
+      "css": ".ds-garment { display:flex; align-items:center; gap:12px; padding:10px; border:1px solid var(--color-line, #e4e4e4); border-radius:var(--radius-control, 12px); background:color-mix(in srgb, var(--color-mist, #f5f5f4) 50%, var(--color-paper, #fff)); font-family:var(--font-sans, Archivo, sans-serif); } .ds-garment__thumb { width:48px; height:56px; flex:none; border-radius:9px; background:linear-gradient(0deg, var(--color-mist, #f5f5f4), var(--color-mist, #f5f5f4)); } .ds-garment__text { flex:1; min-width:0; } .ds-garment__name { display:block; font-size:.75rem; font-weight:600; color:var(--color-ink, #0b0b0c); } .ds-garment__price { display:block; margin-top:4px; font-size:.75rem; font-weight:600; font-variant-numeric:tabular-nums; color:var(--color-ink, #0b0b0c); } .ds-garment__form { display:flex; align-items:center; gap:6px; flex:none; } .ds-garment__size { padding:6px 8px; border:1px solid var(--color-line, #e4e4e4); border-radius:var(--radius-control, 12px); background:var(--color-paper, #fff); color:var(--color-ink, #0b0b0c); font-family:inherit; font-size:.75rem; } .ds-garment__size:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; } .ds-garment__add { padding:8px 12px; border:0; border-radius:var(--radius-control, 12px); background:var(--color-ink, #0b0b0c); color:var(--color-paper, #fff); font-family:inherit; font-size:.8125rem; font-weight:600; cursor:pointer; transition:background-color .24s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-garment__add:hover { background:var(--color-ink-soft, #17171a); } .ds-garment__add:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; }"
+    },
+    {
+      "name": "Sticky Header Nav",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "64px sticky bar: wordmark, category links with an active state, and the bag link carrying the count badge.",
+      "html": "<header class=\"ds-nav\">\n  <a class=\"ds-nav__wordmark\" href=\"#\">BrandName</a>\n  <nav class=\"ds-nav__links\">\n    <a class=\"ds-nav__link\" href=\"#\">Dresses</a>\n    <a class=\"ds-nav__link ds-nav__link--active\" href=\"#\">Tops</a>\n    <a class=\"ds-nav__link\" href=\"#\">Outerwear</a>\n  </nav>\n  <a class=\"ds-nav__bag\" href=\"#\">Bag<span class=\"ds-nav__count\">2</span></a>\n</header>",
+      "css": ".ds-nav { display:flex; align-items:center; gap:20px; height:64px; padding:0 20px; border-bottom:1px solid var(--color-line, #e4e4e4); background:color-mix(in srgb, var(--color-paper, #fff) 95%, transparent); font-family:var(--font-sans, Archivo, sans-serif); } .ds-nav__wordmark { padding:4px 0; font-family:var(--font-display, 'Bricolage Grotesque', sans-serif); font-size:.9375rem; font-weight:800; letter-spacing:-.02em; text-transform:uppercase; color:var(--color-ink, #0b0b0c); text-decoration:none; } .ds-nav__links { display:flex; align-items:center; gap:28px; } .ds-nav__link { padding:8px 0; font-size:.875rem; color:var(--color-muted, #57575c); text-decoration:none; text-underline-offset:.25em; transition:color .2s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-nav__link:hover { color:var(--color-ink, #0b0b0c); text-decoration:underline; } .ds-nav__link--active { font-weight:600; color:var(--color-ink, #0b0b0c); } .ds-nav__link:focus-visible, .ds-nav__bag:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; } .ds-nav__bag { position:relative; display:inline-flex; align-items:center; padding:10px; border-radius:var(--radius-control, 12px); font-size:.875rem; font-weight:600; color:var(--color-ink, #0b0b0c); text-decoration:none; } .ds-nav__bag:hover { background:var(--color-mist, #f5f5f4); } .ds-nav__count { position:absolute; top:-2px; right:-2px; display:flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 4px; border-radius:var(--radius-pill, 999px); background:var(--color-ink, #0b0b0c); color:var(--color-paper, #fff); font-size:.6875rem; font-weight:700; font-variant-numeric:tabular-nums; }"
+    },
+    {
+      "name": "Bag Line Stepper",
+      "kind": "custom",
+      "refersTo": "button-secondary",
+      "description": "Quantity editing on a bag line. Real form buttons, so decrement, increment and remove all work without scripting.",
+      "html": "<form class=\"ds-stepper\">\n  <button class=\"ds-stepper__btn\" type=\"button\" aria-label=\"Reduce quantity\">&#8722;</button>\n  <span class=\"ds-stepper__value\">2</span>\n  <button class=\"ds-stepper__btn\" type=\"button\" aria-label=\"Increase quantity\">+</button>\n</form>",
+      "css": ".ds-stepper { display:inline-flex; align-items:center; gap:4px; padding:4px; border:1px solid var(--color-line, #e4e4e4); border-radius:var(--radius-control, 12px); font-family:var(--font-sans, Archivo, sans-serif); } .ds-stepper__btn { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border:0; border-radius:9px; background:transparent; color:var(--color-ink, #0b0b0c); font-size:1rem; line-height:1; cursor:pointer; transition:background-color .2s var(--ease-expo, cubic-bezier(.16,1,.3,1)); } .ds-stepper__btn:hover:not(:disabled) { background:var(--color-mist, #f5f5f4); } .ds-stepper__btn:focus-visible { outline:2px solid var(--color-ink, #0b0b0c); outline-offset:2px; } .ds-stepper__btn:disabled { opacity:.3; cursor:not-allowed; } .ds-stepper__value { width:32px; text-align:center; font-size:.875rem; font-weight:600; font-variant-numeric:tabular-nums; color:var(--color-ink, #0b0b0c); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Shop Window That Behaves Like the Feed",
+    "overview": "This is a Ghanaian womenswear storefront whose customers already buy through Instagram and WhatsApp. The interface therefore refuses the category default — a decorative hero above a generic product grid — and instead opens on the brand's own latest post at full feed scale, with the garment taken straight out of it. The catalogue is the feed; browsing is the same gesture the shopper already makes in a chat app. The world is paper and ink: a white field for merchandise, near-black fields for the moments that carry weight, hairline rules instead of boxes, and exactly one saturated colour that is never decoration. Type does the expressive work — a compressed grotesque display voice against a neutral workhorse text face — which is what keeps a two-colour page from reading as a wireframe. Everything visible is placeholder: the brand name, the catalogue, the cedi prices and the photography are illustrative, and the interface says so out loud rather than letting a visitor mistake it for the shop's real offer.",
+    "keyCharacteristics": [
+      "Paper-white field, ink-black moments, hairline rules; no third ground.",
+      "One signal red, reserved strictly for discount and out-of-stock.",
+      "Display type does the expression; the layout stays quiet.",
+      "Elevation is declared once per state — a hairline at rest, a single lift on hover.",
+      "Motion settles, never fades.",
+      "Placeholder content is labelled as placeholder, in the interface itself."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Signal red is a fact about money, never a mood. It may mark a discount, a sold-out state, or a destructive action; it may not appear as an accent, a border, an illustration fill, or a brand flourish. A page with no discount shows no red at all.", "section": "colors" },
+      { "name": "The Two-Grotesque Rule", "body": "Display is Bricolage Grotesque and text is Archivo; a system display face (Impact, Arial Black, the platform sans) never stands in for the display voice, and the two never swap roles.", "section": "typography" },
+      { "name": "The Micro Ceiling Rule", "body": "Nothing functional is set below 0.75rem (12px). Micro labels earn their smallness from uppercase tracking, not from shrinking past legibility.", "section": "typography" },
+      { "name": "The Above-Above Rule", "body": "Space above a heading always exceeds space below it: 5rem above a section header, 1rem beneath the heading's rule, 2rem before its content. A heading never floats in the middle of its own section.", "section": "layout" },
+      { "name": "The Hairline or Lift Rule", "body": "An element shows a defined edge or a soft elevation, never both. A 1px border sitting under a wide diffuse shadow is the ghost card this system refuses.", "section": "elevation" },
+      { "name": "The Nested Radius Rule", "body": "An element nested inside a rounded control takes a smaller radius than its parent (9px inside 12px), so the two curves stay concentric instead of fighting.", "section": "shapes" },
+      { "name": "The Given Size Rule", "body": "Add to bag always carries a chosen size. A control that adds a garment without one is not allowed; where space is tight, the size selector rides inside the chip rather than being assumed.", "section": "components" }
+    ],
+    "dos": [
+      "Do keep the page field paper-white and the ink fields ink; there is no third ground.",
+      "Do draw boundaries with the 1px hairline and reserve shadows for hover and for genuinely floating surfaces.",
+      "Do set prices, quantities and stock counts in tabular numerals so columns align.",
+      "Do give every interactive element a 2px ink focus ring with a 2px offset, on paper and on ink alike.",
+      "Do label illustrative content as illustrative, wherever a visitor could mistake it for the shop's real offer.",
+      "Do keep functional text at or above 0.75rem, and interactive targets at or above 24px on both axes."
+    ],
+    "donts": [
+      "Don't use signal red as decoration; it belongs to discount, sold-out and destructive actions only.",
+      "Don't combine a visible border with a wide diffuse shadow on the same element in the same state.",
+      "Don't fade or blur text as an entrance effect — a reader may be mid-sentence when a fade would drop contrast below the floor.",
+      "Don't set the display voice in a system font, or swap the two faces' roles.",
+      "Don't put a decorative eyebrow or kicker above a heading; the heading carries its own weight and the section rule does the framing.",
+      "Don't invent brand assets — no logo, monogram or wordmark exists yet, so the interface uses a neutral placeholder frame and the placeholder name, never a fabricated identity.",
+      "Don't present placeholder catalogue, prices or photography as fact."
+    ]
+  }
+}
