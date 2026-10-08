@@ -13,6 +13,11 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    public function index(): RedirectResponse
+    {
+        return redirect()->route('admin.dashboard');
+    }
+
     public function create(): View
     {
         return view('admin.products.form', [
