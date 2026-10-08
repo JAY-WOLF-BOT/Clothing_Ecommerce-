@@ -1,1 +1,784 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Faces
+   Self-hosted, latin subset, variable weight axes. Loaded from the project's
+   own files — no hosted stylesheet, so the first paint never waits on a
+   third-party host.
+--------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/archivo-latin.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('../fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
+   Tokens
+   The incumbent boutique world, named: paper and ink grounds, hairline rules,
+   and a single signal red that is reserved for discount and nothing else.
+--------------------------------------------------------------------------- */
+
+@theme {
+  --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0b0b0c;
+  --color-ink-soft: #17171a;
+  --color-paper: #ffffff;
+  --color-mist: #f5f5f4;
+  --color-line: #e4e4e4;
+  --color-line-strong: #c8c8c8;
+  --color-muted: #57575c;
+  --color-on-ink: #ffffff;
+  --color-on-ink-muted: #b9b9bf;
+
+  /* Discount only. Never decoration, never brand voice. */
+  --color-signal: #c8102e;
+  --color-signal-soft: #fdeef1;
+
+  --radius-control: 12px;
+  --radius-card: 16px;
+  --radius-inner: 9px;
+  --radius-pill: 999px;
+
+  --shadow-lift: 0 1px 2px rgb(11 11 12 / 0.05), 0 18px 32px -20px rgb(11 11 12 / 0.28);
+  --shadow-sheet: 0 28px 60px -28px rgb(11 11 12 / 0.4);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   Base — the surfaces nobody draws still carry the design
+--------------------------------------------------------------------------- */
+
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* The focus ring belongs to the palette, not to Chrome's default blue. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  input,
+  textarea,
+  select {
+    caret-color: var(--color-ink);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-line-strong);
+    border: 3px solid var(--color-paper);
+    border-radius: var(--radius-pill);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Primitives
+--------------------------------------------------------------------------- */
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-control);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    padding: 0.875rem 1.25rem;
+    transition:
+      background-color 0.24s var(--ease-expo),
+      color 0.24s var(--ease-expo),
+      border-color 0.24s var(--ease-expo),
+      transform 0.24s var(--ease-expo);
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-primary {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: #26262b;
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    background-color: var(--color-paper);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    border-color: var(--color-ink);
+  }
+
+  .btn-inverse {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .btn-inverse:hover:not(:disabled) {
+    background-color: #ededed;
+  }
+
+  .btn-sm {
+    padding: 0.625rem 0.9rem;
+    font-size: 0.8125rem;
+  }
+
+  /* A square control, for the segments of a button group: it holds the button
+     family's radius and states and gives up only its asymmetric padding. */
+  .btn-icon {
+    flex: 0 0 auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .link {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s var(--ease-expo);
+  }
+
+  .link:hover {
+    text-decoration-line: underline;
+  }
+
+  .field {
+    width: 100%;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background-color: var(--color-paper);
+    padding: 0.8125rem 0.9rem;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    transition:
+      border-color 0.2s var(--ease-expo),
+      box-shadow 0.2s var(--ease-expo);
+  }
+
+  .field::placeholder {
+    color: var(--color-muted);
+  }
+
+  .field:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 3px rgb(11 11 12 / 0.08);
+  }
+
+  .field[aria-invalid='true'] {
+    border-color: var(--color-signal);
+    box-shadow: 0 0 0 3px var(--color-signal-soft);
+  }
+
+  /* -------------------------------------------------------------------------
+     Dropdown menu
+     The trigger is a field; the list it opens is drawn by the browser we
+     control rather than by the operating system, so it carries the palette
+     instead of the platform's. The native select stays in the document — it
+     holds the value and it is what the form submits — and it is the visible
+     control whenever scripting is not there to replace it.
+  ------------------------------------------------------------------------- */
+
+  .select-native {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2357575c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5 12 15l6-5.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem 1rem;
+    padding-inline-end: 2.35rem;
+  }
+
+  /* With no scripting there is no trigger to work, so it is not shown; with
+     scripting the native control steps aside and keeps the value. */
+  html:not(.js) .select-trigger {
+    display: none;
+  }
+
+  .js .select-native {
+    display: none;
+  }
+
+  .select-trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.625rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background-color: var(--color-paper);
+    padding: 0.8125rem 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--color-ink);
+    text-align: start;
+    cursor: pointer;
+    transition:
+      border-color 0.2s var(--ease-expo),
+      box-shadow 0.2s var(--ease-expo);
+  }
+
+  .select-trigger:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .select-trigger[aria-expanded='true'],
+  .select-trigger:focus-visible {
+    outline: none;
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 3px rgb(11 11 12 / 0.08);
+  }
+
+  .select-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .select-chevron {
+    flex: 0 0 auto;
+    margin-inline-start: auto;
+    color: var(--color-muted);
+    transition: transform 0.24s var(--ease-expo);
+  }
+
+  .select-trigger[aria-expanded='true'] .select-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Compact tones, for controls that ride inside a row rather than a form. */
+  .select-sm .select-trigger {
+    padding: 0.5625rem 0.7rem;
+    font-size: 0.8125rem;
+  }
+
+  .select-sm .select-native {
+    padding: 0.5625rem 2.1rem 0.5625rem 0.7rem;
+    font-size: 0.8125rem;
+  }
+
+  .select-xs .select-trigger {
+    gap: 0.375rem;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .select-xs .select-native {
+    background-position: right 0.5rem center;
+    background-size: 0.875rem 0.875rem;
+    padding: 0.375rem 1.75rem 0.375rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* The list itself. It floats, so it carries Lift and no border — the same
+     elevation the toast uses, for the same reason. */
+  .menu {
+    position: fixed;
+    z-index: 65;
+    max-height: 19rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: var(--radius-control);
+    background-color: var(--color-paper);
+    padding: 0.25rem;
+    box-shadow: var(--shadow-lift);
+    transform-origin: top center;
+  }
+
+  .menu[hidden] {
+    display: none;
+  }
+
+  .menu-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-inner);
+    padding: 0.5rem 0.625rem 0.5rem 2rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: var(--color-ink);
+    text-align: start;
+    cursor: default;
+    user-select: none;
+  }
+
+  /* Focus stays on the trigger while the list is open, so the option under
+     the keyboard is marked by the module rather than by :focus. */
+  .menu-item:hover,
+  .menu-item[data-active='true'] {
+    background-color: var(--color-mist);
+  }
+
+  .menu-item[aria-selected='true'] {
+    font-weight: 600;
+  }
+
+  .menu-indicator {
+    position: absolute;
+    inset-inline-start: 0.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ink);
+    opacity: 0;
+  }
+
+  .menu-item[aria-selected='true'] .menu-indicator {
+    opacity: 1;
+  }
+
+  /* -------------------------------------------------------------------------
+     Input group
+     A field boundary that carries more than a value: an icon, a unit, or the
+     buttons that step it. The group owns the border and the focus state and
+     the control inside gives up both, so the whole field reads as one object.
+     Addons are written after the control in the document and placed by
+     `data-align`, which keeps the tab order equal to the reading order.
+  ------------------------------------------------------------------------- */
+
+  .input-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background-color: var(--color-paper);
+    transition:
+      border-color 0.2s var(--ease-expo),
+      box-shadow 0.2s var(--ease-expo);
+  }
+
+  .input-group:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .input-group:has(> .input-group-control:focus) {
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 3px rgb(11 11 12 / 0.08);
+  }
+
+  .input-group[data-invalid='true'] {
+    border-color: var(--color-signal);
+    box-shadow: 0 0 0 3px var(--color-signal-soft);
+  }
+
+  .input-group-control {
+    min-width: 0;
+    flex: 1 1 auto;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0.8125rem 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+    resize: vertical;
+  }
+
+  .input-group-control::placeholder {
+    color: var(--color-muted);
+  }
+
+  /* The group draws the focus state. The control never draws a second one. */
+  .input-group-control:focus,
+  .input-group-control:focus-visible {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .input-group-addon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    cursor: text;
+    user-select: none;
+  }
+
+  .input-group-addon[data-align='inline-start'] {
+    order: -1;
+    margin-inline-end: -0.5rem;
+    padding-inline-start: 0.8125rem;
+  }
+
+  .input-group-addon[data-align='inline-end'] {
+    order: 1;
+    margin-inline-start: -0.5rem;
+    padding-inline-end: 0.8125rem;
+  }
+
+  /* A button in an addon is an inset control, so it hugs the boundary instead
+     of the addon's text padding. */
+  .input-group-addon:has(> .input-group-button) {
+    padding: 0.375rem;
+    margin-inline: 0;
+  }
+
+  .input-group-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-inner);
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-ink);
+    transition: background-color 0.2s var(--ease-expo);
+  }
+
+  .input-group-button:hover:not(:disabled) {
+    background-color: var(--color-mist);
+  }
+
+  .input-group-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* -------------------------------------------------------------------------
+     Button group
+     Adjacent controls that share one boundary. The outer corners keep the
+     control radius, the inner corners square off, and the shared edge is drawn
+     once by the neighbour on the left.
+  ------------------------------------------------------------------------- */
+
+  .button-group {
+    display: flex;
+    width: fit-content;
+    align-items: stretch;
+  }
+
+  .button-group > * {
+    position: relative;
+  }
+
+  /* Focus rises above the neighbours, so a ring is never clipped by the
+     segment beside it. */
+  .button-group > *:focus-within {
+    z-index: 10;
+  }
+
+  .button-group > *:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+  }
+
+  .button-group > *:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .button-group-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background-color: var(--color-mist);
+    padding-inline: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  /* A segment that is one choice among several: the radio is the control and
+     the segment is its face, so the keyboard, the form, and the reading all
+     go through the input that was already there. */
+  .segment {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background-color: var(--color-paper);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition:
+      border-color 0.2s var(--ease-expo),
+      background-color 0.2s var(--ease-expo),
+      color 0.2s var(--ease-expo);
+  }
+
+  .segment:hover {
+    border-color: var(--color-ink);
+  }
+
+  .segment:has(> input:focus-visible) {
+    outline: 2px solid var(--color-ink);
+    outline-offset: -2px;
+  }
+
+  .segment:has(> input:checked) {
+    border-color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .segment:has(> input:disabled) {
+    border-style: dashed;
+    color: var(--color-muted);
+    cursor: not-allowed;
+  }
+
+  .segment:has(> input:disabled) > span {
+    text-decoration: line-through;
+  }
+
+  /* Elevation is declared once per state: a hairline at rest, one lift on
+     hover. Never a border under a wide shadow at the same time. */
+  .card {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background-color: var(--color-paper);
+    transition:
+      border-color 0.3s var(--ease-expo),
+      box-shadow 0.3s var(--ease-expo),
+      transform 0.3s var(--ease-expo);
+  }
+
+  .card-interactive:hover {
+    border-color: transparent;
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-3px);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: var(--radius-pill);
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .micro {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rule {
+    border-color: var(--color-line);
+  }
+
+  /* Horizontal carousel that keeps a real scrollbar for keyboards. */
+  .snap-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .snap-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .snap-slide {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion — one authored moment, from an already-visible default.
+   The settle moves; it never fades or blurs. Text that is mid-transition is
+   still text someone may be reading, and a fade would drop it below the
+   contrast floor for the length of the animation. The reveal only applies
+   under html.js, so a failed script leaves the catalogue on screen.
+--------------------------------------------------------------------------- */
+
+.js .reveal {
+  transform: translateY(14px);
+  transition: transform 0.62s var(--ease-expo);
+  transition-delay: calc(var(--reveal-i, 0) * 55ms);
+}
+
+.js .reveal.is-in {
+  transform: none;
+}
+
+.js .bag-badge-pop {
+  animation: badge-pop 0.42s var(--ease-expo);
+}
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(0.6);
+  }
+  55% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.js .toast-in {
+  animation: toast-in 0.4s var(--ease-expo);
+}
+
+/* The list settles out of its trigger. It does not fade: a menu that fades in
+   is text at partial contrast for the length of the animation, and the first
+   thing a reader does with a list is read it. */
+.js .menu-in {
+  animation: menu-in 0.24s var(--ease-expo);
+}
+
+@keyframes menu-in {
+  from {
+    transform: scale(0.96) translateY(-0.25rem);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.js .drawer-in {
+  animation: drawer-in 0.34s var(--ease-expo);
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}

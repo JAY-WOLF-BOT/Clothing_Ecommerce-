@@ -1,213 +1,104 @@
 @extends('layouts.app')
 
+@section('title', $category->name.' — '.config('store.name'))
+@section('description', $category->tagline ?? 'Browse the '.$category->name.' collection.')
+
 @section('content')
-<div class="py-4">
-    <!-- Back Button -->
-    <a href="/" class="inline-flex items-center space-x-2 text-xs font-semibold text-gray-600 hover:text-black mb-6 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        <span>Back to Home Feed</span>
-    </a>
+    <section class="shell pt-6">
 
-    <!-- Category Header -->
-    <div class="mb-8">
-        <h1 class="text-3xl font-extrabold text-gray-900 capitalize">{{ $category }} Collection</h1>
-        <p class="text-sm text-gray-500 mt-1">Explore our exclusive selection of {{ $category }}.</p>
-    </div>
+        <nav class="flex items-center gap-2 text-xs text-muted" aria-label="Breadcrumb">
+            <a href="{{ route('home') }}" class="link hover:text-ink">Home</a>
+            <span aria-hidden="true">/</span>
+            <span class="text-ink">{{ $category->name }}</span>
+        </nav>
 
-    <!-- Filters & Sort Bar -->
-    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-gray-200">
-        <div class="flex items-center space-x-3 text-xs">
-            <span class="font-semibold text-gray-700">Filter By:</span>
-            <select class="bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:ring-black focus:border-black">
-                <option>Size (All)</option>
-                <option>Small (S)</option>
-                <option>Medium (M)</option>
-                <option>Large (L)</option>
-            </select>
-            <select class="bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:ring-black focus:border-black">
-                <option>Color (All)</option>
-                <option>Black</option>
-                <option>White</option>
-                <option>Beige</option>
-            </select>
-        </div>
+        <header class="mt-5 border-b border-line pb-6">
+            <h1 class="font-display text-[1.9rem] font-extrabold leading-tight tracking-[-0.035em] text-ink sm:text-[2.4rem]">
+                {{ $category->name }}
+            </h1>
+            @if ($category->tagline)
+                <p class="mt-3 max-w-xl text-sm leading-relaxed text-muted">{{ $category->tagline }}</p>
+            @endif
+        </header>
 
-        <div class="flex items-center space-x-2 text-xs">
-            <span class="font-semibold text-gray-700">Sort By:</span>
-            <select class="bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:ring-black focus:border-black">
-                <option>Newest</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-            </select>
-        </div>
-    </div>
+        {{-- Filters are a plain GET form: they work without JavaScript, and
+             auto-submit where scripting is available. --}}
+        <form method="GET" action="{{ route('category.show', $category) }}" data-filter-form class="mt-6">
+            @php
+                $sizeOptions = ['' => 'All sizes'] + $sizes->mapWithKeys(fn ($size) => [$size => $size])->all();
+                $colourOptions = ['' => 'All colours'] + $colours->mapWithKeys(fn ($colour) => [$colour => $colour])->all();
+            @endphp
 
-    <!-- Dynamic Category Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex items-center gap-2 text-xs font-semibold text-muted">
+                    <x-icon name="filter" class="h-4 w-4" />
+                    <span class="micro">Filter</span>
+                </div>
 
-        @if($category === 'dresses')
-            <!-- DRESSES COLLECTION -->
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <span class="absolute top-3 left-3 bg-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">Best Seller</span>
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Silk Series</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Minimalist Silk Dress</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$120.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
+                <label id="filter-size-label" for="filter-size" class="sr-only">Size</label>
+                <x-store.select name="size"
+                                id="filter-size"
+                                tone="sm"
+                                :options="$sizeOptions"
+                                :selected="$activeSize"
+                                labelledby="filter-size-label" />
 
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Evening Wear</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Satin Wrap Gown</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$160.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
+                <label id="filter-colour-label" for="filter-colour" class="sr-only">Colour</label>
+                <x-store.select name="colour"
+                                id="filter-colour"
+                                tone="sm"
+                                :options="$colourOptions"
+                                :selected="$activeColour"
+                                labelledby="filter-colour-label" />
 
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Casual</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Floral Tiered Midi Dress</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$95.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
+                <label id="filter-sort-label" for="filter-sort" class="sr-only">Sort by</label>
+                <x-store.select name="sort"
+                                id="filter-sort"
+                                tone="sm"
+                                class="sm:ml-auto"
+                                :options="$sorts"
+                                :selected="$activeSort"
+                                labelledby="filter-sort-label" />
 
-        @elseif($category === 'tops')
-            <!-- TOPS COLLECTION -->
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <span class="absolute top-3 left-3 bg-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">New</span>
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Basics</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Classic White Tee</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$45.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
+                <button type="submit" class="btn btn-secondary btn-sm" data-filter-submit>Apply</button>
 
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Workwear</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Oversized Linen Shirt</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$75.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Knitwear</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Ribbed Cropped Top</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$50.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
-
-        @elseif($category === 'outerwear')
-            <!-- OUTERWEAR COLLECTION -->
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <span class="absolute top-3 left-3 bg-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">Trending</span>
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Coats</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Classic Trench Coat</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$210.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Jackets</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Vintage Leather Biker Jacket</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$280.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Tailored</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Structured Wool Blazer</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="font-bold text-gray-900">$190.00</span>
-                        <span class="bg-gray-900 text-white text-xs font-medium px-3 py-2 rounded-lg">View</span>
-                    </div>
-                </div>
-            </a>
-        @elseif($category === 'sale')
-            <!-- SALE COLLECTION -->
-            <a href="/product/1" class="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
-                <div class="aspect-square bg-gray-100 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">35% OFF</span>
-                </div>
-                <div class="p-4">
-                    <p class="text-xs text-red-600 font-semibold uppercase tracking-wider mb-1">Clearance</p>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-gray-600 transition">Minimalist Silk Dress</h3>
-                    <div class="flex items-center justify-between mt-3">
-                        <div>
-                            <span class="font-bold text-red-600">$78.00</span>
-                            <span class="text-xs text-gray-400 line-through ml-1">$120.00</span>
-                        </div>
-                        <span class="bg-black text-white text-xs font-medium px-3 py-2 rounded-lg">Grab Deal</span>
-                    </div>
-                </div>
-            </a> 
-
-        @else
-            <!-- DEFAULT / ALL ITEMS FALLBACK -->
-            <div class="col-span-full py-12 text-center text-gray-500">
-                <p>Select a category from the top navigation menu to view products.</p>
+                @if ($activeSize || $activeColour || $activeSort !== 'curated')
+                    <a href="{{ route('category.show', $category) }}" class="link text-xs font-semibold text-muted hover:text-ink">
+                        Clear
+                    </a>
+                @endif
             </div>
-        @endif
 
-    </div>
-</div>
+            <p class="mt-4 text-xs text-muted" data-filter-count aria-live="polite">
+                {{ $products->total() }} {{ $products->total() === 1 ? 'piece' : 'pieces' }}
+                @if ($activeSize || $activeColour)
+                    matching your filters
+                @endif
+            </p>
+        </form>
+
+        <div class="mt-8" data-filter-results>
+            @if ($products->isEmpty())
+                <x-store.empty-state icon="filter"
+                                     title="Nothing matches those filters"
+                                     :body="'Try a different size or colour — or clear the filters to see the whole '.strtolower($category->name).' collection.'">
+                    <a href="{{ route('category.show', $category) }}" class="btn btn-primary">Clear filters</a>
+                </x-store.empty-state>
+            @else
+                {{-- Keeps the document outline honest: the grid is a section of
+                     this category, so its cards hang off this heading. --}}
+                <h2 class="sr-only">{{ $category->name }} in stock</h2>
+
+                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($products as $product)
+                        <x-store.product-card :product="$product" :index="$loop->index" />
+                    @endforeach
+                </div>
+
+                <div class="mt-12">
+                    {{ $products->onEachSide(1)->links() }}
+                </div>
+            @endif
+        </div>
+    </section>
 @endsection

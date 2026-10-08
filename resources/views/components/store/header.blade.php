@@ -33,6 +33,12 @@
         </nav>
 
         <div class="ml-auto flex items-center gap-1">
+            <a href="{{ route('home') }}"
+               class="rounded-control p-2.5 text-ink transition hover:bg-mist"
+               aria-label="Home">
+                <x-icon name="home" class="h-5 w-5" />
+            </a>
+
             <a href="{{ route('bag.index') }}"
                class="relative rounded-control p-2.5 text-ink transition hover:bg-mist"
                aria-label="Your bag">
