@@ -1,0 +1,8 @@
+<!-- Provisional placeholder frame: this is deliberately not a brand mark.
+     PRODUCT.md records that no logo or wordmark exists yet; replace this file
+     when the real identity lands. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Placeholder icon">
+    <rect width="32" height="32" rx="7" fill="#0b0b0c"/>
+    <rect x="7.5" y="7.5" width="17" height="17" rx="3" fill="none" stroke="#ffffff" stroke-width="1.6"/>
+    <path d="M11.5 20.5 20.5 11.5" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
