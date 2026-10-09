@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Banner -->
-    <div class="relative bg-black text-white rounded-2xl overflow-hidden mb-10 p-8 sm:p-12 flex flex-col items-start justify-center min-h-[240px]">
+    <div class="relative bg-black text-white rounded-2xl overflow-hidden mb-10 p-8 sm:p-12 flex flex-col items-start justify-center min-h-60">
         <span class="text-xs uppercase tracking-widest text-gray-400 mb-2 font-semibold">Welcome to BrandName</span>
         <h1 class="text-3xl sm:text-4xl font-extrabold mb-4 max-w-xl leading-tight">See What's Trending Right Now</h1>
         <a href="/category/all" class="bg-white text-black font-semibold px-6 py-2.5 rounded-full hover:bg-gray-200 transition text-sm">
