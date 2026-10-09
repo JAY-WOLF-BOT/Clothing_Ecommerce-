@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="min-w-[760px] text-left">
+                    <table class="min-w-190 text-left">
                         <thead class="bg-mist text-xs uppercase tracking-[0.16em] text-muted">
                             <tr>
                                 <th class="px-5 py-3 font-medium">Product</th>
