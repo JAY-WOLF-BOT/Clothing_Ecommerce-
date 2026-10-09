@@ -11,7 +11,7 @@
 @endphp
 
 <div data-toast-host
-     class="pointer-events-none fixed inset-x-0 bottom-4 z-[60] flex flex-col items-center gap-2 px-4 sm:bottom-6">
+     class="pointer-events-none fixed inset-x-0 bottom-4 z-60 flex flex-col items-center gap-2 px-4 sm:bottom-6">
     @foreach ($toasts as $toast)
         <div data-toast
              role="status"
