@@ -21,7 +21,7 @@
                                  alt="{{ $heroImage->alt ?? 'Latest post' }}"
                                  width="1200" height="1500"
                                  fetchpriority="high" decoding="async"
-                                 class="h-[24rem] w-full object-cover sm:h-[31rem] lg:h-[35rem]">
+                                 class="h-96 w-full object-cover sm:h-124 lg:h-140">
                         @endif
 
                         <div class="absolute left-4 top-4 flex flex-wrap items-center gap-2">
@@ -96,7 +96,7 @@
     @if ($posts->count() > 1)
         <section id="feed" class="shell mt-20 sm:mt-24">
             <div class="flex flex-wrap items-end justify-between gap-3 border-b border-line pb-4">
-                <h2 class="font-display text-xl font-extrabold tracking-[-0.025em] text-ink sm:text-2xl">
+                <h2 class="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
                     From the feed
                 </h2>
                 <p class="text-xs text-muted">The channel you already shop us from, now shoppable in place</p>
@@ -114,7 +114,7 @@
     @if ($featured->isNotEmpty())
         <section id="collection" class="shell mt-20 sm:mt-24">
             <div class="flex flex-wrap items-end justify-between gap-3 border-b border-line pb-4">
-                <h2 class="font-display text-xl font-extrabold tracking-[-0.025em] text-ink sm:text-2xl">
+                <h2 class="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
                     In stock now
                 </h2>
                 <a href="{{ route('category.show', $categories->firstWhere('slug', 'dresses') ?? $categories->first()) }}"
@@ -135,7 +135,7 @@
     {{-- CATEGORIES --}}
     <section class="shell mt-20 sm:mt-24">
         <div class="border-b border-line pb-4">
-            <h2 class="font-display text-xl font-extrabold tracking-[-0.025em] text-ink sm:text-2xl">
+            <h2 class="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
                 Shop by category
             </h2>
         </div>
