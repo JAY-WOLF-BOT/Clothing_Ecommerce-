@@ -33,7 +33,7 @@
                              width="1100" height="1375"
                              fetchpriority="high" decoding="async"
                              data-gallery-main
-                             class="aspect-[4/5] w-full object-cover">
+                             class="aspect-4/5 w-full object-cover">
                     @endif
 
                     @if ($product->isOnSale())
@@ -51,7 +51,7 @@
                                     data-src="{{ $image->path }}"
                                     data-alt="{{ $image->alt ?? $product->name }}"
                                     @if ($loop->first) aria-current="true" @endif
-                                    class="overflow-hidden rounded-control border border-line transition duration-300 ease-expo hover:border-ink [&[aria-current]]:border-ink">
+                                    class="overflow-hidden rounded-control border border-line transition duration-300 ease-expo hover:border-ink aria-[current]:border-ink">
                                 <img src="{{ $image->path }}"
                                      alt=""
                                      width="1100" height="1375"
@@ -137,7 +137,7 @@
                                        value="1"
                                        data-qty-input
                                        aria-label="Quantity"
-                                       class="input-group-control tabular w-9 shrink-0 px-0 py-[0.6875rem] text-center text-sm font-semibold">
+                                       class="input-group-control tabular w-9 shrink-0 px-0 py-2.75 text-center text-sm font-semibold">
 
                                 <span class="input-group-addon" data-align="inline-start">
                                     <button type="button" data-qty-step="-1" class="input-group-button">
@@ -227,7 +227,7 @@
         @if ($related->isNotEmpty())
             <section class="mt-20">
                 <div class="flex flex-wrap items-end justify-between gap-3 border-b border-line pb-4">
-                    <h2 class="font-display text-xl font-extrabold tracking-[-0.025em] text-ink">
+                    <h2 class="font-display text-xl font-extrabold tracking-tight text-ink">
                         More {{ strtolower($product->category->name) }}
                     </h2>
                     <a href="{{ route('category.show', $product->category) }}"
